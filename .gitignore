@@ -1,0 +1,16 @@
+.venv/
+backend/venv/
+__pycache__/
+*.py[cod]
+backend/db.sqlite3
+backend/media/
+backend/.env
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+frontend/tsconfig.tsbuildinfo
+frontend/.git/
+desktop.ini
+exercise-dataset-main/
+exercise-dataset-main.zip
