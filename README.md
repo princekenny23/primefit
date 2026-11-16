@@ -157,6 +157,14 @@ npm run dev
 
 Open `http://localhost:3000`. The frontend calls `http://localhost:8000/api` by default. Set `NEXT_PUBLIC_API_URL` to use a different API URL. The app loads and saves database-backed content through the running API; when the API or database is unavailable, the frontend cannot persist activity.
 
+### Deploy to Render and Vercel
+
+The root `render.yaml` configures the Django API service. In Render, create a PostgreSQL database and set the service's `DATABASE_URL` to its **internal** connection URL. Set `CORS_ALLOWED_ORIGINS` and `FRONTEND_URL` to the deployed Vercel origin (for example, `https://your-app.vercel.app`). The service uses `primefit_api.wsgi`, installs Gunicorn, collects Django static files, and runs migrations before starting.
+
+In Vercel, import this repository and set the project's **Root Directory** to `frontend`. Add `NEXT_PUBLIC_API_URL` with the Render API URL ending in `/api` (for example, `https://primefit-api.onrender.com/api`), then deploy. If Render assigns a different service hostname, update the API URL and the backend's `DJANGO_ALLOWED_HOSTS` setting accordingly.
+
+Render's local filesystem is ephemeral, and this project does not yet configure persistent/object storage for user uploads. Profile photos, community images, event flyers, and imported exercise images need a durable media-storage solution before relying on them in production.
+
 ### Tests and checks
 
 Run the API test suite from the repository root:
